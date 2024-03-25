@@ -1,0 +1,18 @@
+class ListNode:
+    def _init_(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:  # Cycle detected
+                slow = head 
+                while slow != fast:  # Find the start
+                     slow = slow.next
+                     fast = fast.next
+                return slow
+        return None  # No cycle
